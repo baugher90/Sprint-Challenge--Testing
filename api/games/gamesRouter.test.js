@@ -14,6 +14,11 @@ describe("gamesRouter.js", () => {
                 .set('Accept', 'application/json')
                 .expect('Content-Type', /json/)
             })
+            it("should be functional", async () => {
+                await request(router).get("/games")
+                .set('Accept', 'application/json')
+                .expect({message:"here you go", rows: []});
+              });
         })
     })
 })
