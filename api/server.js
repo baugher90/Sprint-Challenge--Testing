@@ -1,6 +1,7 @@
-require("dotenv").config();
+const express = require("express");
+const morgan = require("morgan")
+const server = express();
 
-const server = require("./api/server.js");
+server.use(express.json(), morgan());
 
-const port = process.env.PORT || 5000;
-server.listen(port, () => console.log(`\n** server up on port ${port} **\n`));
+module.exports = server;
