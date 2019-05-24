@@ -32,4 +32,18 @@ describe("gamesModel", () => {
         expect(getAll).toEqual(database);
     })
   });
+  describe("findById()", () => {
+    beforeEach(async () => {
+      await db("games").truncate();
+    });
+    it("should find the game with the given id", async () => {
+        const game = await Games.insert({ 
+            title: "Fortnight",
+            genre: "Dancing",
+            releaseYear: 2020,
+        });
+        const findById = await Games.findById(game.id);
+        expect(findById).toEqual(game);
+    })
+  });
 });
