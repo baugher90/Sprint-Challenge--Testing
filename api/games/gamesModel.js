@@ -4,6 +4,7 @@ module.exports = {
   insert,
   getAll,
   findById,
+  update,
 };
 
 async function insert(games) {
@@ -20,4 +21,10 @@ function findById(id) {
     .select( 'id', 'title', 'genre', 'releaseYear', )
     .where({ id })
     .first();
+}
+
+async function update(id, changes) {
+    return db('games')
+    .where({ id })
+    .update(changes, '*');
 }
