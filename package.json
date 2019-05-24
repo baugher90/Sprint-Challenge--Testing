@@ -30,5 +30,8 @@
 		"jest": "^23.6.0",
 		"knex-cleaner": "^1.1.4",
 		"supertest": "^3.3.0"
-	}
+	},
+	"jest" : {
+		"testEnvironment": "node"
+	  }
 }
