@@ -3,6 +3,7 @@ const db = require('../../data/dbConfig');
 module.exports = {
   insert,
   getAll,
+  findById,
 };
 
 async function insert(games) {
@@ -12,4 +13,11 @@ async function insert(games) {
 
 function getAll() {
     return db('games');
+}
+
+function findById(id) {
+    return db('games')
+    .select( 'id', 'title', 'genre', 'releaseYear', )
+    .where({ id })
+    .first();
 }
