@@ -46,4 +46,26 @@ describe("gamesModel", () => {
         expect(findById).toEqual(game);
     })
   });
+  describe("update()", () => {
+    beforeEach(async () => {
+      await db("games").truncate();
+    });
+    it("should update the provided game in the db", async () => {
+        let game = await Games.insert({ 
+            title: "Fortnight",
+            genre: "Dancing",
+            releaseYear: 2020,
+        });
+        expect(game.title).toBe('Fortnight')
+        let updatedGame = { 
+            id: game.id, 
+            title: "Minecraft", 
+            genre: "Saddness"
+        }
+        await Games.update(game.id, updatedGame);
+        await Games.findById(game.id).then(res => {
+            expect(res.title).toBe(updatedGame.title)
+        })
+    })
+  });
 });
