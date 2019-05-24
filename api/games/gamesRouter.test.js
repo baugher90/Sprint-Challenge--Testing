@@ -3,9 +3,9 @@ const router = require("../server");
 const db = require("../../data/dbConfig");
 
 describe("gamesRouter.js", () => {
-    beforeEach(async () => {
-        await db("games").truncate();
-      });
+  beforeEach(async () => {
+    await db("games").truncate();
+  });
   describe("endpoints", () => {
     describe("GET/games", () => {
       it("should return 200 OK", async () => {
@@ -39,6 +39,18 @@ describe("gamesRouter.js", () => {
           .send(data)
           .set("Accept", "application/json")
           .expect("Content-Type", /json/);
+      });
+      it("should return 201 game data OK", async () => {
+        let data = {
+          title: "Fortnight",
+          genre: "Dancing",
+          releaseYear: 2020
+        };
+        await request(router)
+          .post("/games")
+          .send(data)
+          .set("Accept", "application/json")
+          .expect(201);
       });
     });
   });
