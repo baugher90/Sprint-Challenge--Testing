@@ -1,7 +1,11 @@
 const request = require("supertest");
 const router = require("../server");
+const db = require("../../data/dbConfig");
 
 describe("gamesRouter.js", () => {
+    beforeEach(async () => {
+        await db("games").truncate();
+      });
   describe("endpoints", () => {
     describe("GET/games", () => {
       it("should return 200 OK", async () => {

@@ -7,8 +7,8 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const game = await db.insert(req.body);
-  res.status(201).json(game);
-});
+    const game = await db.insert(req.body);
+    res.status(201).json(game);
+  });
 
 module.exports = router;
