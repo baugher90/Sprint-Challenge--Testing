@@ -68,4 +68,21 @@ describe("gamesModel", () => {
         })
     })
   });
+  describe("remove()", () => {
+    beforeEach(async () => {
+      await db("games").truncate();
+    });
+    it("should remove the record", async () => {
+        await Games.insert({ 
+            title: "Fortnight",
+            genre: "Dancing",
+            releaseYear: 2020,
+        });
+      const games = await db("games");
+      expect(games).toHaveLength(1);
+      await Games.remove(games[0].id);
+      const deletedGames = await db("games");
+      expect(deletedGames).not.toHaveLength(1);
+    });
+  });
 });
