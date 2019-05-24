@@ -52,6 +52,18 @@ describe("gamesRouter.js", () => {
           .set("Accept", "application/json")
           .expect(201);
       });
+      it("should return status code 422 if game data no OK", async () => {
+        let data = {
+            name: "Fortnight",
+            genre: "Dancing",
+            releaseYear: 2020
+          };
+          await request(router)
+            .post("/games")
+            .send(data)
+            .set("Accept", "application/json")
+            .expect(422);
+      });
     });
   });
 });
