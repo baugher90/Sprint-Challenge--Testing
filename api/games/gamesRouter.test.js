@@ -7,9 +7,13 @@ describe("gamesRouter.js", () => {
             it("should return 200 OK", async () => {
                 await request(router).get("/games")
                 .set('Accept', 'application/json')
-                .expect('Content-Type', /json/)
                 .expect(200);
               });
+            it("should return JSON data", async () => {
+                await request(router).get("/games")
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+            })
         })
     })
 })
