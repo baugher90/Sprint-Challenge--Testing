@@ -52,17 +52,29 @@ describe("gamesRouter.js", () => {
           .set("Accept", "application/json")
           .expect(201);
       });
-      it("should return status code 422 if game data no OK", async () => {
+      it("should return status code 422 and a message if no title", async () => {
         let data = {
-            name: "Fortnight",
-            genre: "Dancing",
+          name: "Fortnight",
+          genre: "Dancing",
+          releaseYear: 2020
+        };
+        await request(router)
+          .post("/games")
+          .send(data)
+          .set("Accept", "application/json")
+          .expect(422, {message: "missing title to create game"});
+      });
+      it("should return status code 422 and a message if no title", async () => {
+        let data = {
+            title: "Fortnight",
+            noGenre: "Dancing",
             releaseYear: 2020
           };
           await request(router)
             .post("/games")
             .send(data)
             .set("Accept", "application/json")
-            .expect(422);
+            .expect(422,{message: "missing genre to create game"});
       });
     });
   });
